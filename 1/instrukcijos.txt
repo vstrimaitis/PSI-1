@@ -1,0 +1,11 @@
+0. Padaryt visus reikiamus install stepus
+1. Isitikint kad yra bash'as (reik Windows 10 anniversary update. Jei tokio ner, tai arba parsisiust, arba dirbt per linux)
+2. Atisdaryt sitam foldery cmd
+3. Rasyt
+	bash compile
+4. Atsinaujins LtNSO.pdf
+5. ???
+6. Profit
+
+Edit'inimas vyksta faile LtNSO.tex
+KITU FAILU NELIEST!

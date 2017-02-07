@@ -1,0 +1,74 @@
+
+\colorlet{headcolor}{gray!25}
+\renewcommand{\tabularxcolumn}[1]{ m{#1} }
+\newcommand\TopSpace{\rule{0pt}{2.6ex}}       % Top strut
+\newcommand\BottomSpace{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+\newcolumntype{M}[1]{ >{\centering\arraybackslash} m{#1} }
+
+\newcounter{subCount}
+\newcounter{ir}
+\setcounter{ir}{0}
+\newcounter{fr}
+\setcounter{fr}{0}
+\newcounter{nfr}
+\setcounter{nfr}{0}
+
+\newcommand{\ir}[2]{%
+    \stepcounter{ir}
+    \generateTable{IR\their}{#1}{#2}
+}
+
+\newcommand{\fr}[2]{%
+    \stepcounter{fr}
+    \generateTable{FR\thefr}{#1}{#2}
+}
+
+\newcommand{\nfr}[2]{%
+    \stepcounter{nfr}
+    \generateTable{NFR\thenfr}{#1}{#2}
+}
+
+\makeatletter
+\def\nobreakhline{%
+  \noalign{\ifnum0=`}\fi
+    \penalty\@M
+    \futurelet\@let@token\LT@@nobreakhline}
+\def\LT@@nobreakhline{%
+  \ifx\@let@token\hline
+    \global\let\@gtempa\@gobble
+    \gdef\LT@sep{\penalty\@M\vskip\doublerulesep}% <-- change here
+  \else
+    \global\let\@gtempa\@empty
+    \gdef\LT@sep{\penalty\@M\vskip-\arrayrulewidth}% <-- change here
+  \fi
+  \ifnum0=`{\fi}%
+  \multispan\LT@cols
+     \unskip\leaders\hrule\@height\arrayrulewidth\hfill\cr
+  \noalign{\LT@sep}%
+  \multispan\LT@cols
+     \unskip\leaders\hrule\@height\arrayrulewidth\hfill\cr
+  \noalign{\penalty\@M}%
+  \@gtempa}
+\makeatother
+
+\newcommand{\header}[1]{%
+    \nobreakhline
+    \multicolumn{3}{|c|}{\cellcolor{headcolor} #1} \\*
+    \nobreakhline
+}
+
+\newcommand{\generateTable}[3]{%
+    #1 &
+    {
+        \setcounter{subCount}{1}%
+        \let\oldbackslash\\
+        \renewcommand{\tabularxcolumn}[1]{ p{##1} }%
+        \begin{tabularx}{\linewidth}{  @{\hspace{\tabcolsep}#1.\thesubCount\ifnum\value{subCount}<10 \hphantom{0}\fi\hspace{\tabcolsep}} | X  }
+          \global\def\\{\TopSpace\BottomSpace\stepcounter{subCount}\oldbackslash \hline}
+          #3
+        \end{tabularx}%
+        \global\let\\\oldbackslash
+    } &
+    #2 \\
+    \hline
+}

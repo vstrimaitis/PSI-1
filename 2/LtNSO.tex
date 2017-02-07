@@ -1,0 +1,605 @@
+\documentclass{VUMIFPSkursinis}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{blindtext}
+\usepackage{bm}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{scrextend}
+\usepackage{subfig}
+\usepackage{wrapfig}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{xparse}
+%\usepackage{tabularx}
+\usepackage{ltxtable}
+\usepackage{tabu}
+\usepackage{xcolor}
+
+% Titulinio aprašas
+\university{Vilniaus universitetas}
+\faculty{Matematikos ir informatikos fakultetas}
+\department{Programų sistemų katedra}
+\papertype{2 laboratorinis darbas}
+\title{Lietuvos Nacionalinė Sporto Organizacija }
+\titleineng{Lithuanian National Sports Organization}
+\status{2 kurso 5 grupės studentai}
+\author{Margiris Strakšys}
+\secondauthor{Gabrielė Saletytė}
+\thirdauthor{Vytautas Strimaitis}
+\fourthauthor{Gabijus Arūnas Šukaitis}
+\supervisor{lekt. Vytautas Valaitis}
+\date{Vilnius – \the\year}
+
+% Nustatymai
+% \setmainfont{Palemonas}   % Pakeisti teksto šriftą į Palemonas (turi būti įdiegtas sistemoje)
+%\bibliography{bibliografija}
+\input{customCommands}
+
+%==========================================================================> Dokumento pradžia <========================================================================
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\sectionnonum{Anotacija} \label{anotacija}
+	Šiuo darbu siekiama specifikuoti versle išskiriamus reikalavimus. 
+	Šiame laboratoriniame bus analizuojamos išskirtų reikalavimų savybės ir jų verifikavimas.
+	Projekto tikslas - išnagrinėti informacinės sistemos vartotojo sąsajos, funkcinius ir nefunkcinius reikalavimus bei jų ypatumus.
+\sectionnonum{Įvadas} \label{ivadas}
+  \subsection*{Programų sistemos pavadinimas} \label{ivadas_pavadinimas}
+    „Lietuvos nacionalinė sporto organizcija” (sutrumpintas sistemos pavadinimas - „LtNSO”).
+
+  \subsection*{Darbo tikslas} \label{ivadas_tikslas}
+    Specifikuoti vartotojo sąsajos, funkcinius ir nefunkcinius reikalavimus.
+	
+  \subsection*{Naudotojai} \label{ivadas_naudotojai}
+	Informacinė sistema skirta organizatoriams, komitetui, dalyviams, darbuotojams bei visiems susidomėjusiems.
+
+  \subsection*{Darbo pagrindas}  \label{ivadas_darboPagrindas}
+    Dokumentas parengtas kaip programų sistemų inžinerijos laboratorinis darbas.
+
+% Gabriele START
+\section{Vartotojo interfeiso reikalavimai} \label{vartotojoInterfeisoReikalavimai}
+  Šiame skyriuje apžvelgiami ir konkretizuojami reikalavimai sistemos vartotojo interfeisui. Taip pat suformuluojamos atskirų agentų užduotys.
+  \begin{longtabu} to \linewidth{ | M{2cm} | @{}X@{} | M{2.5cm} | }
+    \caption{Vartotojo interfeiso reikalavimai}
+    \label{table:interfeisoReikalavimai}
+    \endfirsthead
+    \endhead
+    \hline
+    \textbf{Kodas} & \multicolumn{1}{|c|}{\textbf{Reikalavimas}} & \textbf{Svarba} \\
+    \hline
+    \header{Dalykinės srities metaforos reikalavimai}
+    \ir{Būtinas}
+    {
+      Sąrašas „Ieškome“ sistemoje pateikia sąrašą potencialiems darbuotojams su laisvomis darbo vietomis. \\
+      Pasirinkimas „Registracija“ sistemoje pateikia anketą naujo sistemos vartotojo registracijai. \\
+      Pasirinkimas „Bilietai“ pateikia likusių bilietų kiekį ir suteikia galimybę nusipirkti bilietus į norimas varžybas. \\
+      Pasirinkimas „Vaizdo įrašai“ pateikia nuorodų sąrašą su įvykusių bei dabar vykstančių varžybų įrašais. \\
+      Pasirinkimas „Rezultatai“ sistemoje pateikia informaciją su varžybų rezultatais. \\
+      Pasirinkimas „Komentarai“ sistemoje pateikia atsiliepimų sąrašą. \\
+	  Pasirinkimas „Renginių sąrašas“ sistemoje atveria langą su visomis varžybomis. \\
+      Piktograma „Deganti lemputė“ atvaizduoja tekstinį langą naujai idėjai išreikšti bei pateikti komitetui. \\
+      Piktograma „Kalendorius“ atvaizduoja kalendorių su artimiausiu metu vyksiančiomis varžybomis
+    }
+
+    \header{Formuluojamos vartotojo užduotys}
+    \ir{Būtinas}
+    {
+      Užsiregistruoti į informacinę sistemą. \\
+      Prisijungti prie sistemos su savo vartotojo vardu arba el. paštu ir slaptažodžiu. \\
+      Peržiūrėti ir redaguoti savo profilį. \\
+      Turėti prieigą prie tik vartotojams skirtų sistemos funkcijų. \\
+      Turėti galimybę ištrinti savo vartotojo paskyrą iš sistemos. \\
+      Pateikti siūlymą su naujomis idėjomis. \\
+      Atsijungti nuo informacinės sitemos.
+    }
+
+    \header{Formuluojamos administratoriaus užduotys}
+    \ir{Būtinas}
+    {
+      Privalo būti registruotas vartotojas. \\
+      Pridėti naujas varžybas. \\
+      Peržiūrėti jau esamų varžybų sąrašą ir redaguoti pasirinktų varžybų informaciją. \\
+      Įrašyti į sistemą dalyvių rezultatus. \\
+      Peržiūrėti ir redaguoti dalyvių rezultatų lentelę. \\
+      Peržiūrėti ir redaguoti varžybų vaizdo įrašų sąrašą.
+    }
+        
+    \header{Formuluojamos dalyvio užduotys}
+    \ir{Būtinas}
+    {
+      Privalo būti registruotas vartotojas. \\
+      Vykdyti varžybų paiešką. \\
+      Sukurti komandą. \\
+      Užsiregistruoti į varžybas individualiai ar su komanda. \\
+      Peržiūrėti varžybų rezultatus, matyti savo rezultatą bendroje lentelėje. \\
+      Peržiūrėti varžybų vaizdo įrašus.
+    }
+
+    \header{Formuluojamos žiūrovo užduotys}
+    \ir{Būtinas}
+    {
+      Gali būti registruotas vartotojas. \\
+      Įsijungti norimų žiūrėti varžybų tiesioginę transliaciją. \\
+      Peržiūrėti jau vykusių varžybų vaizdo įrašus. \\
+      Peržiūrėti pasibaigusių varžybų rezultatų suvestines. \\
+      Palikti atsiliepimą apie varžybas. \\
+      Pateikti siūlymą su naujomis idėjomis.
+    }
+    
+    \header{Užduočių formulavimo kalbos reikalavimai}
+    \ir{Būtinas}
+    {
+      Užduotys vykdomos internetinėje svetainėje bei mobiliojoje programėlėje. \\
+      Pagrindinis informacijos perdavimo naudotojui būdas - vaizdinė medžiaga. Stengiamasi minimizuoti teksto kiekį,
+		į pagalbą pasitelkti paveiksliukus bei spalvas, tačiau neprarasti aiškumo. \\
+      Užduotys pasiekiamos per meniu ar šoninę aktualiausių užduočių lango dalį. \\
+      Meniu patalpintas patogioje vartotojui vietoje, netrukdo turinio peržiūrai, tačiau yra visada pasiekiamas. \\
+      Šoninė aktualių užduočių lango dalis matoma tik pagrindiniame puslapyje.
+    }
+    \ir{Būtinas}
+    {
+      Svetainė bei programėlė neturi būti perpildyta reklamomis. \\
+      Reklamos turi būti neįkyrios. \\
+      Reklamos turi netrukdyti naudotis sistema. \\
+      Reklamos turi būti neinteraktyvios. \\
+      Reklamos talpinamos šonuose.
+    }
+    \ir{Pageidautinas}
+    {
+      Peržiūrimas vaizdo įrašas atsidaro naujame, kiek mažesniame lange.
+    }
+    
+    \header{Interfeiso darnos ir standartizavimo reikalavimai}
+    \ir{Būtinas}
+    {
+      Vartotojo interfeisas turi atitikti operacinės sistemos, kurioje programa naudojama, standartą. \\
+      Vartotojo interfeisas turi būti visapusiškai susietas: programos komponentai turi derėti estetiškai bei neatlikti padrikų funkcijų. 
+    }
+
+    \header{Pranešimų formulavimo reikalavimai}
+    \ir{Būtinas}
+    {
+      Sistemoje pranešimai, skirti vartotojui, turi būti formuluojami ne ilgesni nei dvejais sakiniais. \\                                      
+      Sistemos pranešimai turi apimti tik vieną temą, dėl kurios pranešimas buvo iškviestas. Kitokios informacijos juose negali būti. \\
+      Pranešimai turi būti aiškūs, kad vartotojas kiekvienu atveju žinotų kaip elgtis toliau.
+    }
+    
+    \header{Interfeiso individualizavimo reikalavimai}
+    \ir{Būtinas}
+    {
+      Galima pasirinkti kalbą iš kelių variantų, kaip: lietuvių, anglų, rusų. \\
+      Galima pasirinkti informacinės sistemos fono tematiką, spalvą, kad vartotojai galėtų pritaikyti aplinką savo akims patinkančiu variantu. \\
+      Vartotojui yra galimybė pasirinkti vieną ar kelias mėgiamiausias sporto rungtis, kurias jis nori nuolatos sekti. 
+		Pasirinkus jas, vos prisijungus į sistemą, pradiniame puslapyje pateikiama naujausia šių sričių informacija. \\
+      Vartotas gali pasirinkti sekamus dalyvius, kad galėtų patogiai matyti su jų pasirodymu varžybose susijusią informaciją.
+    }
+  \end{longtabu}
+%Gabriele END
+%Vytas START  
+\section{Funkciniai reikalavimai} \label{funkciniaiReikalavimai}
+  Šiame skyriuje pateikiami sistemos funkciniai reikalavimai, t.y. pagrindinės sistemos atliekamos funkcijos, konkretūs jų aprašymai.
+	\subsection*{Pagrindinės sistemos funkcijos}
+  \begin{longtabu} to \linewidth{ | M{2cm} | @{}X@{} | M{2.5cm} | }
+    \caption{Pagrindinės sistemos funkcijos}
+    \label{table:pagrindinesSistemosFunkcijos}
+    \endfirsthead
+    \endhead
+    \hline
+    \textbf{Kodas} & \multicolumn{1}{|c|}{\textbf{Reikalavimas}} & \textbf{Svarba} \\
+    \hline
+	
+    \header{Vartotojo registracija}
+    \fr{Būtinas}
+    {
+      Pradiniame puslapyje paspaudus mygtuką ,,Registracija'' atsiveria registracijos anketa. \\
+      Vartotojas turi galimybę tekstiniuose laukuose įvesti savo vardą, pavardę, elektroninį paštą bei vartotojo vardą, jei pageidaujama. \\
+      Šalia įvesto prisijungimo vardo atsiradusi žalia varnelė simbolizuoja galimą vartotojo vardą. \\
+      Šalia įvesto prisijungimo vardo atriradęs raudonas ,,X'' simbolis simbolizuoja netinkamą vartotojo vardą. Registracija nebaigiama, kol laukas nepataisomas. \\
+      Vartotojas turi tekstiniame lauke įvesti slaptažodį. \\
+      Vartotojui rašant slaptažodį visi simboliai privalo būti paslėpti (pvz. simboliais ,,*''). \\
+      Šalia slaptažodžiui skirto lauko atsiradęs žalias užrašas ,,Stiprus'' simbolizuoja sunkiai atspėjamą slaptažodį,
+			kuris yra ne trumpesnis nei 8 simbolių ilgio, jame egzituoja bent trijų skirtingų simbolių tipai, tokie kaip
+			raidės, skaičiai, specialieji simboliai. \\
+		  Šalia slaptažodžiui skirto lauko atsiradęs raudonas užrašas ,,Silpnas'' simbolizuoja netinkamą slaptažodį,
+			kuris nėra bent 8 simbolių ilgio arba kuriame yra tik vieno tipo simboliai. Registracija nebaigiama, kol slaptažodis nepakeičiamas į stiprų. \\
+      Po slaptažodžiui skirto lauko turi būti kitas laukas, skirtas pakartoti slaptažodžiui. \\
+      Šalia antrojo slaptažodžiui skirto lauko atsiradusi žalia varnelė simbolizuoja sutapusį slaptažodį. \\
+      Šalia antrojo slaptažodžiui skirto lauko atsiradęs raudonas ,,X'' simbolizuoja nesutapusį slaptažodį. \\
+    }
+	
+    \header{Komandos sukūrimas}
+    \fr{Būtinas}
+    {
+      Vartotojui prisijungus į sistemą ir pradinio puslapio viršutiniame dešiniame kampe paspaudus mygtuką su profilio ikona atsiveria
+      vartotojo profilio duomenys. \\
+      Po esančiais duomenimis egzistuoja skiltis ,,Mano komandos''.\\
+      Po skilties su vartotojo komandų sąrašu yra mygtukas ,,Sukurti komandą''. \\
+      Paspaudus mygtuką ,,Sukurti komandą'' atsiveria langas komandos registracijai. \\
+      Komandos registracijos lango viršuje yra tekstinis laukas, skirtas komandos pavadinimui. \\
+      Po pavadinimo esančiame tekstiniame lauke įrašomas komandos aprašymas. \\
+      Po aprašymo esančiuose tekstiniuose laukuose įrašomi kitų komandos narių vartotojo vardas (vardai) arba elektroninio pašto adresas (adresai). \\
+      Norint pridėti papildomą komandos narį, spaudžiamas mygtukas ,,+'', esantis po paskutinio komandos nario informacija. \\
+      Įvedus visus narius spaudžiamas mygtukas ,,Sukurti''. \\
+      Sukūrus komandą, kiti nariai turi patvirtinti prisijungimą. \\
+      Kol narys nėra patvirtinęs prisijungimo prie komandos, jo vardas atvaizduojamas šviesiai pilka spalva, šalia vaizduojama būsena ,,Laukia patvirtinimo''. \\
+      Kai narys patvirtina prisijungimą, jo vardas tampa atvaizduojamas juoda spalva, šalia atsiranda būsena ,,Narys''. \\
+      Jei narys atmeta pakvietimą, jo vardas dingsta iš komandos sąrašo. \\
+      Šalia komandos kūrėjo vardo vaizduojama būsena ,,Kapitonas''.	
+    }
+	
+    \header{Prisijungimas prie komandos}
+    \fr{Būtinas}
+    {
+      Vartotojui prisijungus į sistemą ir pradinio puslapio viršutiniame dešiniame kampe paspaudus mygtuką su profilio ikona atsiveria
+      vartotojo profilio duomenys. \\
+      Esančių duomenų pabaigoje vaizduojamos vartotojo komandos bei komandos, į kurias vartotojas yra kviečiamas. \\
+      Paspaudus ant komandos, į kurią yra kviečiamas, vartotojas gali peržiūrėti narių sudėtį bei prisijungti prie komandos arba atmesti pakvietimą
+      paspaudus atitinkamai žalią mygtuką ,,Prisijungti'' arba raudoną mygtuką ,,Atmesti''. \\
+      Prisijungus prie komandos, ji atsiduria sąraše ,,Mano komandos''.
+    }
+    
+    \header{Dalyvių registracija į varžybas}
+    \fr{Būtinas}
+    {
+      Pradiniame puslapyje pasirinkus ,,Renginių sąrašas'' atsiveria puslapis su visais artėjančiais sporto renginiais. \\
+      Pasirinkus norimą renginį, atsiveria galimybė registruotis į varžybas, jei vartotojas yra prisijungęs. \\
+      Jei vartotojas nėra prisijungęs, jo paprašoma prisijungti prieš registruojantis į renginį. \\
+      Jei registracija į varžybas jau yra pasibaigusi ar nebėra laisvų vietų, mygtukas ,,Registracija'' vaizduojamas pilkai, nėra galimybės jo paspausti. \\
+      Jei registracija dar vyksta ir varžybos skirtos individualiems dalyviams, paspaudus raudoną mygtuką ,,Registracija'' dalyvis užregistruojamas į renginį. \\
+      Jei registracija dar vyksta ir varžybos yra komandinės, tai paspaudus ,,Registracija'' parodomas komandų, su tinkama sudėtimi, sąrašas. \\
+      Pasirinkus norimą komandą varžyboms, komanda užregistruojama į sporto renginį. \\
+      Skiltyje ,,Mano profilis'' pateikiamas visų renginių, į kuriuos yra užsiregsitravęs vartotojas, sąrašas.
+    }
+    
+    \header{Darbuotojų registracija}
+    \fr{Būtinas}
+    {
+      Pradinio puslapio dešinėje yra skiltis ,,Ieškome'', kurioje pateiktas ieškomų darbuotojų sąrašas. \\
+      Šalia kiekvieno punkto yra mygtukas ,,Registracija'', kurį paspaudus atsiveria galimybė įkelti CV bei motyvacinį laišką. \\
+      Skiltyje ,,Mano profilis'' pateikiamas sąrašas pozicijų, į kurias buvo aplikuota, ir kiekvienos iš jų būsena.
+    }
+    
+    \header{Bilietų prekyba}
+    \fr{Būtinas}
+    {
+      Pradiniame puslapyje kairėje esantis pasirinkimas ,,Bilietai'' atveria puslapį, kuriame pateikiama informacija apie likusius bilietus. \\
+      Atsivėrusiame puslapyje galima pasirinkti norimas varžybas, bilietų kiekį bei vietas. \\
+      Puslapio apačioje vaizduojamos įvairių bankų ikonos, kurios žiūrovui leidžia pasirinkti patogiausią apmokėjimo būdą.
+    }
+    
+    \header{Tiesioginis renginio stebėjimas internetu}
+    \fr{Būtinas}
+    {
+      Pradiniame puslapyje kairėje esantis mygtukas ,,Vaizdo įrašai'' atveria nuorodų sąrašą su įvykusių varžybų nuorodomis į vaizdo įrašus. \\
+      Virš sąrašo yra raudonas mygtukas su užrašu “Gyvai”. \\
+      Paspaudus mygtuką ,,Gyvai'', vartotojui pateikiamas sąrašas su dabar vykstančių rungčių transliacijomis. \\
+      Spustelėjęs ant norimų varžybų, vartotojas gali stebėti renginį realiu laiku. \\
+    }
+    
+    \header{Rezultatų peržiūra}
+    \fr{Būtinas}
+    {
+      Sistemos vartotojui, pradiniame puslapyje pasirinkusiam “Rezultatai” lentelės forma pateikiamos visos varžybos su rezultatais. \\
+      Jei varžybos dar neįvyko arba rezultatai dar nėra įkelti į sistemą, šalia varžybų vietoje rezultatų privalo būti pateiktas pilkas užrašas: 
+      ,,Rezultatų nėra''. \\
+    }
+    
+    \header{Komentarų skaitymas ir rašymas}
+    \fr{Būtinas}
+    {
+      Vartotojui pradiniame puslapyje paspaudus mygtuką “Komentarai” jam privalo būti atvaizduotas visų jau parašytų atsiliepimų sąrašas. \\
+      Atsiliepimų sąrašo pabaigoje turi egzistuoti tekstinis laukas su galimybe palikti savo atsiliepimą. \\
+      Virš šio lauko turi būti naudotojui prieinamos galimybės tą tekstą redaguoti.
+    }
+%Vytas END
+%Margiris START
+    
+    \header{Naujos idėjos pasiūlymas}
+    \fr{Būtinas}
+    {
+      Pradiniame puslapyje vartotojui spustelėjus ikoną su degančia lempute atsiveria tekstinis laukas, kuriame žiūrovas gali detaliai aprašyti savo idėją,
+      kurią norėtų pateikti organizatoriams. \\
+      Virš šio tekstinio lauko turi būti vieta temai bei naudotojo el. paštui, jei jis nėra prisijungęs prie sistemos. \\
+      Ši informacija automatiškai pateikiama organizatoriams.
+    }
+    
+    \header{Varžybų grafiko peržiūra}
+    \fr{Būtinas}
+    {
+      Pradinio puslapio dešinėje turi būti atvaizduotas kalendorius su visomis varžybomis. \\
+      Paspaudus ant šio kalendoriaus, jis atsiveria per visą langą su detalesne informacija. \\
+      Spustelėjus ant kurios nors konkrečios dienos, iššoka langas su informacija apie atitinkamas rungtis: 
+      jų laikas, vieta, dalyviai, parduotų bilietų kiekis procentais, būsena (“pasibaigęs”, “vyksta”, “artėja”) ir kt.
+    }
+	\end{longtabu}
+\newpage
+\subsection*{Pagalbinės sistemos funkcijos}
+  \begin{longtabu} to \linewidth{ | M{2cm} | @{}X@{} | M{2.5cm} | }
+    \caption{Pagalbinės sistemos funkcijos}
+    \label{table:pagalbinesSistemosFunkcijos}
+    \endfirsthead
+    \endhead
+    \hline
+    \textbf{Kodas} & \multicolumn{1}{|c|}{\textbf{Reikalavimas}} & \textbf{Svarba} \\
+    \hline
+    
+    \header{Gražiausių savaitės momentų peržiūra}
+    \fr{Pageidautinas}
+    {
+      Pradinio puslapio kairėje yra mygtukas ,,Vaizdo įrašai'', kuris atveria langą su varžybų įrašais. \\
+      Lango pabaigoje yra mygtukas ,,Savaitės gražiausi epizodai'', atveriantis šios savaitės gražiausių epizodų rinkinį. \\
+      Rinkinio pabaigoje matomi praėjusių savaičių rinkiniai su galimybe juos peržiūrėti.
+    }
+
+    \header{Savaitės geriausio sportininko rinkimai}
+    \fr{Pageidautinas}
+    {
+      Pagrindiniame lange paspaudus piktogramą su auksiniu užrašu „MVP” (most valuable player) ir užrašu „PGŽ” (pats geriausias žaidėjas) 
+      atsidarys naujas langas, kuriame vyks balsavimas. \\
+      Balsuoti galima už bet kurį žaidėją, dalyvaujantį varžybose šią savaitę. \\
+      Galima balsuoti tris kartus, taip suteikiant galimybę vartotojui diferencijuoti savo pasirinkimą, jeigu jis turi ne vieną favoritą. \\
+      Balsavimas vyksta rodant žaidėjų sąrašą, o įvedandus tekstą pasirinkimų mažės, kol galiausiai vartojas pasirinks savo favoritą. \\
+      Tuomet atsiras pasirinkimo mygtukas „Patvirtinti pasirinkimą”. \\
+      Pasirinkus žaidėją tris kartus, atsiras lentelė su sakiniu „Jau balsavote 3 kartus, bandykite kitą savaitę”.
+    }
+    
+    \header{Turnyrinių lentelių archyvas}
+    \fr{Pageidautinas}
+    {
+      Pagrindiniame lange paspaudus piktogramą su senų knygų bei rankraščių atvaizdais atsivers naujas langas, kuriame galima pasirinkti norimą sporto šaką. \\
+      Pasirinkus šaką atsivers dar vienas naujas langas, kuriame bus sąrašas su visais įvykusiais tos sporto šakos turnyrais. \\
+      Turi būti galima filtravimo funkcija, kur vartotojas gali įvesti datą arba turnyro pavadinimą. \\
+      Paspaudus ant turnyro atsiveria atitinkamo turnyro lentelė. \\
+      Lentelėje matysis visi vykusio turnyro rezultatai, dalyvavę žaidėjai ir teisėjų brigada. 
+    }
+    
+    \header{Turnyrinių lentelių generacija}
+    \fr{Pageidautinas}
+    {
+      Dalyviams užsiregistravus ir administratoriui patikrinus visus žaidėjus automatiškai sudaroma turnyrinė lentelė. \\
+      Galimi variantai: šveicariškas turnyras, vieno „minuso” arba pralaimėjimo turnyras, dviejų „minusų” arba pralaimėjimų turnyras, 
+      grupių turnyras ir rato sistemos turnyras. \\
+      Sistema, priklausomai nuo to, kiek yra dalyvaujančių komandų, nustato, kokio formato imti turnyro dydį.
+    }
+	\end{longtabu}
+	
+\section{Nefunkciniai reikalavimai} \label{nefunkciniaiReikalavimai}
+  Šiame skyriuje pateikiami nefunkciniai reikalavimai sistemoms, t.y. reikalavimai, tiesiogiai nesusiję su sistemos atliekamomis funkcijomis.
+	\subsection*{Vidinių interfeisų reikalavimai}
+    \begin{longtabu} to \linewidth{ | M{2cm} | @{}X@{} | M{2.5cm} | }
+      \caption{Vidinių interfeisų reikalavimai}
+      \label{table:VidiniuInterfeisuReikalavimai}
+      \endfirsthead
+      \endhead
+      \hline
+      \textbf{Kodas} & \multicolumn{1}{|c|}{\textbf{Reikalavimas}} & \textbf{Svarba} \\
+      \hline
+      \header{Operacinės sistemos naudojimo reikalavimai}
+      \nfr{Būtinas}
+      {
+        Įrenginys turi turėti prieigą prie interneto. \\
+        Kompiuteris turi turėti interneto naršyklę, o mobilusis įrenginys gali turėti ir LtNSO mobiliąją programėlę. 
+      }
+    
+      \header{Sąveikos su duomenų bazėmis reikalavimai}
+      \nfr{Būtinas}
+      {
+        Naudojantis MSSQL duomenų valdymo sistema duomenys yra išsaugomi reliaciniu būdu. \\
+        Duomenų bazėje yra saugomos turnyrinės lentelės, turnyrų dalyviai, vartotojų duomenys, vaizdo įrašai, informacija apie būsimus turnyrus,
+        informacija apie bilietų pardavimą, komentarai bei pateikti pasiūlymai.
+      }
+      
+      \header{Dokumentų mainų reikalavimai}
+      \nfr{Būtinas}
+      {
+        Informacinė sistema bendrauja su serveriu JSON formatu.
+      }
+      
+      \header{Darbo kompiuterių tinkluose reikalavimai}
+      \nfr{Būtinas}
+      {
+        Informacinė sistema keičiasi duomenimis per HTTP protokolą.
+      }
+      
+      \header{Programavimo aplinkos reikalavimai}
+      \nfr{Būtinas}
+      {
+        Darbui su serverine programine įranga naudojama Microsoft Visual Studio IDE. \\
+        Internetinė svetainė kuriama Adobe Dreamweaver. \\
+        Darbui su duomenų baze naudojama Microsoft SQL Server Management Studio. \\
+        Programėlė, skirta Android OS, kuriama su Android Studio. \\
+        Programėlė, skirta iOS, kuriama su XCode. \\
+        Kodo versijavimui ir dalinimuisi naudojama GitHub repozitorija. \\
+        Informacinės sistemos serverio pusė programuojama C\# kalba. \\
+        Internetinei svetainei sukurti naudojamos naujausios web technologijos.
+      }
+    \end{longtabu}
+%Margiris END
+%Gabijus START
+\subsection*{Veikimo reikalavimai}
+  \begin{longtabu} to \linewidth{ | M{2cm} | @{}X@{} | M{2.5cm} | }
+    \caption{Veikimo reikalavimai}
+    \label{table:veikimoReikalavimai}
+    \endfirsthead
+    \endhead
+    \hline
+    \textbf{Kodas} & \multicolumn{1}{|c|}{\textbf{Reikalavimas}} & \textbf{Svarba} \\
+    \hline
+	
+    \header{Vaizdavimo tikslumo reikalavimai}
+    \nfr{Būtinas}
+    {
+      Data informacinėje sistemoje atvaizduojama YYYY-MM-DD formatu. \\
+      Programų sistemos palaikymui yra būtina bent 360 x 640 ekrano rezoliucija su 16M spalvų. \\
+    }
+    
+    \header{Skaičiavimų tikslumo reikalavimai}
+    \nfr{Būtinas}
+    {
+      Skaičiavimo tikslumus rungtyse nustato rungties teisėjai arba laikomasi tos sporto šakos federacijos nustatytomis tikslumo taisyklėmis. \\
+      Skaičiavimai visuose rezultatuose turi būti pastovūs.
+    }
+    
+    \header{Patikimumo reikalavimai}
+    \nfr{Būtinas}
+    {
+      Informacinės sistemos patikimumas yra nurodomas atsižvelgiant į sistemos veikimo be sutrikimų laiką. \\
+      Informacinėje sistemoje gali pasitaikyti ne daugiau kaip vienas sutrikimas per vienerius metus. \\
+      Sutrikimas turi būti pašalintas per vieną valandą nuo jo atsiradimo pradžios.
+    }
+    
+    \header{Robastiškumo reikalavimai}
+    \nfr{Būtinas}
+    {
+      Parodyti pranešimą, kai interneto ryšys tampa silpnas arba iš vis dingsta. \\
+      Būtina nuolatos daryti atsargines duomenų kopijas. \\
+      Įvykus sistemos sutrikimui vartotojo darbo funkcionalumas turi būti atkurtas greičiau nei per 20 sekundžių.
+    }
+    
+    \header{Našumo reikalavimai}
+    \nfr{Būtinas}
+    {
+      Didžiausia leistina programų sistemos apkrova yra 10 000 vartotojų, prisijungusių vienu metu. \\
+      Reakcijos laikas į sistemos vartotojo, dalyvio atliekamus veiksmus turi būti ne daugiau kaip 1 sekundė. \\
+      Užklausos vykdymo laikas turi būti ne daugiau nei viena sekundė.
+    }
+	\end{longtabu}
+	
+\subsection*{Diegimo reikalavimai}
+  \begin{longtabu} to \linewidth{ | M{2cm} | @{}X@{} | M{2.5cm} | }
+    \caption{Diegimo reikalavimai}
+    \label{table:diegimoReikalavimai}
+    \endfirsthead
+    \endhead
+    \hline
+    \textbf{Kodas} & \multicolumn{1}{|c|}{\textbf{Reikalavimas}} & \textbf{Svarba} \\
+    \hline
+	
+    \header{Ruošinio reikalavimai}
+    \nfr{Būtinas}
+    {
+      Informacinė sistema pateikiama Google Play ir iTunes aplikacijų parduotuvėse, iš kurios vartotojai, 
+      administratorius ir dalyviai aplikaciją gali atsisiųsti nemokamai. \\
+      Įsirašius programėlę ir ją pirmą kartą paleidus automatiškai atsidarys registracijos langas, kurį, jei vartotojas nenori užsiregistruoti, 
+      galima uždaryti.
+    }
+    
+    \header{Instaliavimo reikalavimai}
+    \nfr{Būtinas}
+    {
+      Programa turi būti instaliuojama automatiškai per įrenginį. \\
+      Įrenginys turi turėti pakankamai atminties programėlės įrašymui.
+    }
+    
+    \header{Pradinio duomenų bazių kaupimo reikalavimai}
+    \nfr{Būtinas}
+    {
+      Pradinėje duomenų bazėje turi būti sukurtos lentelės, į kurias bus įrašinėjami nauji duomenys. \\
+      Pradinėje duomenų bazėje turi būti įrašytas bent vienas būsimas turnyras.
+    }
+
+    \header{Sistemos įsisavinamumo reikalavimai}
+    \nfr{Būtinas}
+    {
+      Sistema turi turėti tris kalbas: lietuvių, anglų ir rusų. \\
+      Ikonos savo prasme tiesiogiai atspindi mygtuko esmę sistemoje. \\
+      Jei vartotojui vis dėlto kyla neaiškumų, susijusių su programos veikimu, jis gali kreiptis į konsultantą telefonu arba el.paštu.
+    }
+
+	\end{longtabu}
+  
+\subsection*{Aptarnavimo ir priežiūros reikalavimai}
+  \begin{longtabu} to \linewidth{ | M{2cm} | @{}X@{} | M{2.5cm} | }
+    \caption{Aptarnavimo ir priežiūros reikalavimai}
+    \label{table:aptarnavimoIrPrieziurosReikalavimai}
+    \endfirsthead
+    \endhead
+    \hline
+    \textbf{Kodas} & \multicolumn{1}{|c|}{\textbf{Reikalavimas}} & \textbf{Svarba} \\
+    \hline
+
+	\nfr{Būtinas}
+	{
+		Į vartotojo užduodamus klausimus arba užklausas darbo metu turi būti atsakyta ne vėliau nei per 30 min. , o ne darbo metu ne vėliau nei per 12 valandų. \\
+		Praplėtus informacinės sistemos funkcionalumą, kad būtų užtikrintas patikimumas, būtina testuoti atnaujinimus prieš leidžiant jais naudotis vartotojams, dalyviams ir administratoriui. \\
+		Atlikus testavimą ir nesusidūrus su jokiomis klaidomis vartotojai, dalyviai  ir administratorius turi būti automatiškai informuoti pranešimu apie pasikeitimus.\\
+		Programėlę galima atsinaujinti per GooglePlay arba iTunes aplikacijų parduotuves.
+	}
+	
+  \end{longtabu}
+	
+\subsection*{Tiražuojamumo reikalavimai}
+  \begin{longtabu} to \linewidth{ | M{2cm} | @{}X@{} | M{2.5cm} | }
+    \caption{Tiražuojamumo reikalavimai}
+    \label{table:tirazuojamumoReikalavimai}
+    \endfirsthead
+    \endhead
+    \hline
+    \textbf{Kodas} & \multicolumn{1}{|c|}{\textbf{Reikalavimas}} & \textbf{Svarba} \\
+    \hline
+	
+	\nfr{Būtinas}
+	{
+		Programėlė turi sėkmingai veikti mobiliuosiuose įrenginiuose su Android OS, iOS. \\
+		Informacinė sistema privalo palaikyti funkcionalumą šiose naršyklėse: Google Chrome, Mozilla Firefox, Microsoft Explorer, Microsoft Edge, Safari, Opera.
+	}
+	
+  \end{longtabu}
+
+\subsection*{Apsaugos reikalavimai}
+  \begin{longtabu} to \linewidth{ | M{2cm} | @{}X@{} | M{2.5cm} | }
+    \caption{Apsaugos reikalavimai}
+    \label{table:apsaugosReikalavimai}
+    \endfirsthead
+    \endhead
+    \hline
+    \textbf{Kodas} & \multicolumn{1}{|c|}{\textbf{Reikalavimas}} & \textbf{Svarba} \\
+    \hline
+	
+    \nfr{Būtinas}
+    {
+      Duomenų bazė visada turi savo kopiją. Ji atnaujinama kiekvieną dieną 04:20. \\
+      Įvedant slaptažodį, jo raidės atvaizduojamos juodais taškais. \\
+      Duomenų bazėje slaptažodžiai saugomi iš pradžių juos užkodavus. \\
+      Prie duomenų bazėje esančių konfidencialių asmens duomenų gali prieiti tik autorizuoti asmenys. 
+    }
+	
+  \end{longtabu}  
+
+\subsection*{Juridiniai reikalavimai}
+  \begin{longtabu} to \linewidth{ | M{2cm} | @{}X@{} | M{2.5cm} | }
+    \caption{Juridiniai reikalavimai}
+    \label{table:juridiniaiReikalavimai}
+    \endfirsthead
+    \endhead
+    \hline
+    \textbf{Kodas} & \multicolumn{1}{|c|}{\textbf{Reikalavimas}} & \textbf{Svarba} \\
+    \hline
+	  \nfr{Būtinas}
+    {
+      Informacinė sistema turi atitikti visus Lietuvos Respublikoje galiojančius įstatymus.\\
+      Informacinės sistemos duomenų bazėje esantys vartotojų registracijos ir asmeniniai duomenys yra visapusiškai apsaugoti ir prieinami tik autorizuotiems asmenims.\\
+      Vartotojas užsiregistruodamas privalo sutikti su visomis informacinės sistemos naudojimosi nuostatomis.
+    }
+  \end{longtabu}  
+%Gabijus END
+\sectionnonum{Literatūros sąrašas} \label{literaturosSarasas}
+	\begin{itemize}
+    \item Doc. dr. K. Petrausko Programų Sistemų Inžinerijos kurso konspektai
+    \item A. Abran, J. W. Moore, P.Bourque, R. Dupuis, L. L. Tripp - ,,Guide to the Software Engineering Body of Knowledge''
+    \item V. Strimaitis, G. Saletytė, M. Strakšys, G. A. Šukaitis - ,,Lietuvos Nacionalinė Sporto Organizacija. Pirmasis laboratorinis darbas''. VU, MIF, Vilnius. 2016
+	  \item Latex dokumentacija: \url{http://www.latex-project.org/help/documentation/}
+  \end{itemize}
+\end{document}
